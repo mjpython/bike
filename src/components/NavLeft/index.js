@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { Menu } from "antd";
 import "./index.less";
 import MenuConfig from "../../config/menuConfig";
+import { NavLink } from "react-router-dom";
 const { SubMenu } = Menu;
 export default class NavLeft extends PureComponent {
   componentWillMount() {
@@ -17,7 +18,11 @@ export default class NavLeft extends PureComponent {
           </SubMenu>
         );
       }
-      return <Menu.Item key={item.key}>{item.title}</Menu.Item>;
+      return (
+        <Menu.Item key={item.key}>
+          <NavLink to={item.key}>{item.title}</NavLink>
+        </Menu.Item>
+      );
     });
   };
   render() {
