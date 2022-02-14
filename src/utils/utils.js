@@ -3,7 +3,7 @@ export default {
     if (!time) return "";
     let date = new Date(time);
     let second =
-      date.getSeconds() > 10 ? date.getSeconds() : "0" + date.getSeconds();
+      date.getSeconds() >= 10 ? date.getSeconds() : "0" + date.getSeconds();
     return (
       date.getFullYear() +
       "年" +
