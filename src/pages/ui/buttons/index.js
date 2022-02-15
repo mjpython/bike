@@ -7,7 +7,7 @@ import {
   DeleteOutlined,
   DownloadOutlined,
 } from "@ant-design/icons";
-import "./index.less";
+import "../index.less";
 export default class Buttons extends PureComponent {
   state = {
     loading: true,
