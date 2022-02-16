@@ -13,6 +13,7 @@ import Message from "./pages/ui/messages";
 import Tabbs from "./pages/ui/tabs";
 import Gallery from "./pages/ui/gallery";
 import Carousels from "./pages/ui/carousel";
+import Loginn from "./pages/forms/login";
 export default class IRouter extends PureComponent {
   render() {
     return (
@@ -33,6 +34,7 @@ export default class IRouter extends PureComponent {
                   <Route path="/ui/tabs" component={Tabbs} />
                   <Route path="/ui/gallery" component={Gallery} />
                   <Route path="/ui/carousel" component={Carousels} />
+                  <Route path="/form/login" component={Loginn} />
                   <Route component={Nomatch} />
                 </Switch>
               </Admin>
