@@ -181,7 +181,7 @@ export default class Register extends PureComponent {
               <TextArea autoSize={rowObject} />
             </FormItem>
             <FormItem
-              name="timmer"
+              name="time"
               label="起床时间"
               {...layout}
               initialValue={moment("12:08:23", "HH:mm:ss")}
