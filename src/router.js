@@ -18,6 +18,7 @@ import Register from "./pages/forms/register";
 import Basictable from "./pages/table/basicTable";
 import Hightable from "./pages/table/highTable";
 import City from "./pages/city";
+import Order from "./pages/order";
 export default class IRouter extends PureComponent {
   render() {
     return (
@@ -43,6 +44,7 @@ export default class IRouter extends PureComponent {
                   <Route path="/table/basic" component={Basictable} />
                   <Route path="/table/high" component={Hightable} />
                   <Route path="/city" component={City} />
+                  <Route path="/order" component={Order} />
                   <Route component={Nomatch} />
                 </Switch>
               </Admin>

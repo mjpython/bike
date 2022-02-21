@@ -53,7 +53,7 @@ export default class Hightable extends PureComponent {
     let _this = this;
     axios
       .ajax({
-        url: "/table/high/list",
+        url: "high",
         data: {
           params: {
             page: this.params.page,
@@ -61,10 +61,11 @@ export default class Hightable extends PureComponent {
         },
       })
       .then((res) => {
-        res.result.list.map((item, index) => (item.key = index));
-        if (res.code === "0") {
+        console.log(res);
+        res.result.map((item, index) => (item.key = index));
+        if (res.code == "0") {
           this.setState({
-            dataSource1: res.result.list,
+            dataSource1: res.result,
             selectedRows: null,
             selectedRowKeys: [],
             pagination: Utils.pagination(res, (current) => {

@@ -56,7 +56,7 @@ export default class Basictable extends PureComponent {
     let _this = this;
     axios
       .ajax({
-        url: "table/list",
+        url: "table",
         data: {
           params: {
             page: this.params.page,
@@ -64,10 +64,10 @@ export default class Basictable extends PureComponent {
         },
       })
       .then((res) => {
-        res.result.list.map((item, index) => (item.key = index));
-        if (res.code === "0") {
+        res.result.map((item, index) => (item.key = index));
+        if (res.code == "0") {
           this.setState({
-            dataSource1: res.result.list,
+            dataSource1: res.result,
             selectedRows: null,
             selectedRowKeys: [],
             pagination: Utils.pagination(res, (current) => {

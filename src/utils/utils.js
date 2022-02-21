@@ -24,11 +24,11 @@ export default {
       onChange: (current) => {
         callback(current);
       },
-      current: data.result.page,
-      pageSize: data.result.page_size,
-      total: data.result.total,
+      current: data.page,
+      pageSize: data.page_size,
+      total: data.total,
       showTotal: () => {
-        return `一共${data.result.total}条数据`;
+        return `一共${data.total}条数据`;
       },
       showQuickJumper: true,
     };

@@ -17,7 +17,7 @@ export default class City extends PureComponent {
   requestList = () => {
     axios
       .ajax({
-        url: "/open_city",
+        url: "/openCity",
         data: {
           params: {
             page: this.params.page,
@@ -25,9 +25,9 @@ export default class City extends PureComponent {
         },
       })
       .then((res) => {
-        if (res.code === "0") {
+        if (res.code == "0") {
           this.setState({
-            dataSource: res.result.item_list.map((item, index) => {
+            dataSource: res.result.map((item, index) => {
               item.key = index;
               return item;
             }),
@@ -54,13 +54,13 @@ export default class City extends PureComponent {
     let cityInfo = this.myForm.myForm.getFieldsValue();
     axios
       .ajax({
-        url: "/city/open",
+        url: "/openSuccess",
         data: {
           params: cityInfo,
         },
       })
       .then((res) => {
-        if (res.code === "0") {
+        if (res.code == "0") {
           message.success("开通成功");
           this.setState({
             isShowOpenCity: false,
