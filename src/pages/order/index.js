@@ -113,6 +113,24 @@ export default class Order extends PureComponent {
       selectedItem: record, //选中当前行信息
     });
   };
+  // 点击详情
+  openOrderDetail = () => {
+    let item = this.state.selectedItem;
+    if (!item) {
+      Modal.info({
+        title: "信息",
+        content: "请先选择一条订单",
+      });
+      return;
+    }
+    window.open(`/#/common/order/detail/${item.id}`, "_blank");
+  };
+  // 卸载组件清空
+  componentWillUnmount = () => {
+    this.setState = (state, callback) => {
+      return;
+    };
+  };
   render() {
     const {
       dataSource,
@@ -281,45 +299,6 @@ class FilterForm extends PureComponent {
           <Button style={{ margin: "0 20px" }}>重置</Button>
         </FormItem>
       </Form>
-    );
-  }
-}
-class OpenCityForm extends PureComponent {
-  render() {
-    const formItemLayout = {
-      labelCol: {
-        span: 5,
-      },
-      wrapperCol: {
-        span: 10,
-      },
-    };
-    return (
-      <div>
-        <Form {...formItemLayout} ref={(c) => (this.myForm = c)}>
-          <Form.Item label="选择城市" name="city_id" initialValue="1">
-            <Select>
-              <Option value="">全部</Option>
-              <Option value="1">北京市</Option>
-              <Option value="2">天津市</Option>
-            </Select>
-          </Form.Item>
-          <Form.Item label="营运模式" name="op_mode" initialValue="1">
-            <Select>
-              <Option value="">全部</Option>
-              <Option value="1">自营</Option>
-              <Option value="2">加盟</Option>
-            </Select>
-          </Form.Item>
-          <Form.Item label="用车模式" name="use_mode" initialValue="1">
-            <Select>
-              <Option value="">全部</Option>
-              <Option value="1">指定停车点</Option>
-              <Option value="2">禁停区</Option>
-            </Select>
-          </Form.Item>
-        </Form>
-      </div>
     );
   }
 }

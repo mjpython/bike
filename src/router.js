@@ -19,38 +19,52 @@ import Basictable from "./pages/table/basicTable";
 import Hightable from "./pages/table/highTable";
 import City from "./pages/city";
 import Order from "./pages/order";
+import Common from "./common";
+import Detail from "./pages/order/detail";
 export default class IRouter extends PureComponent {
   render() {
     return (
       <HashRouter>
         <App>
-          <Route path="/login" component={Login} />
-          <Route
-            path="/"
-            render={() => (
-              <Admin>
-                <Switch>
-                  <Route path="/home" component={Home} />
-                  <Route path="/ui/buttons" component={Buttons} />
-                  <Route path="/ui/modals" component={Modals} />
-                  <Route path="/ui/loadings" component={Loading} />
-                  <Route path="/ui/notification" component={Notices} />
-                  <Route path="/ui/messages" component={Message} />
-                  <Route path="/ui/tabs" component={Tabbs} />
-                  <Route path="/ui/gallery" component={Gallery} />
-                  <Route path="/ui/carousel" component={Carousels} />
-                  <Route path="/form/login" component={Loginn} />
-                  <Route path="/form/reg" component={Register} />
-                  <Route path="/table/basic" component={Basictable} />
-                  <Route path="/table/high" component={Hightable} />
-                  <Route path="/city" component={City} />
-                  <Route path="/order" component={Order} />
-                  <Route component={Nomatch} />
-                </Switch>
-              </Admin>
-            )}
-          />
-          {/* <Route component={Nomatch} /> */}
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route
+              path="/admin"
+              render={() => (
+                <Admin>
+                  <Switch>
+                    <Route path="/admin/home" component={Home} />
+                    <Route path="/admin/ui/buttons" component={Buttons} />
+                    <Route path="/admin/ui/modals" component={Modals} />
+                    <Route path="/admin/ui/loadings" component={Loading} />
+                    <Route path="/admin/ui/notification" component={Notices} />
+                    <Route path="/admin/ui/messages" component={Message} />
+                    <Route path="/admin/ui/tabs" component={Tabbs} />
+                    <Route path="/admin/ui/gallery" component={Gallery} />
+                    <Route path="/admin/ui/carousel" component={Carousels} />
+                    <Route path="/admin/form/login" component={Loginn} />
+                    <Route path="/admin/form/reg" component={Register} />
+                    <Route path="/admin/table/basic" component={Basictable} />
+                    <Route path="/admin/table/high" component={Hightable} />
+                    <Route path="/admin/city" component={City} />
+                    <Route path="/admin/order" component={Order} />
+                    {/* <Route component={Nomatch} /> */}
+                  </Switch>
+                </Admin>
+              )}
+            />
+            <Route
+              path="/common"
+              render={() => (
+                <Common>
+                  <Route
+                    path="/common/order/detail/:orderId"
+                    component={Detail}
+                  />
+                </Common>
+              )}
+            />
+          </Switch>
         </App>
       </HashRouter>
     );
