@@ -1,3 +1,5 @@
+import { Select } from "antd";
+
 export default {
   formateDate(time) {
     if (!time) return "";
@@ -33,5 +35,31 @@ export default {
       showQuickJumper: true,
     };
     return page;
+  },
+  // 获取选项
+  getOptionList(list) {
+    const Option = Select.Option;
+    if (list) {
+      let OptionList = [];
+      list.map((item, i) => {
+        OptionList.push(<Option value={item.id}>{item.name}</Option>);
+      });
+      return OptionList;
+    }
+  },
+  // selectedRowKeys的封装
+  updateSelectedItem(selectedRowKeys, selectedItem, selectedIds) {
+    if (selectedIds) {
+      this.setState({
+        selectedRowKeys,
+        selectedItem, //选中的那一行
+        selectedIds,
+      });
+    } else {
+      this.setState({
+        selectedRowKeys,
+        selectedItem, //选中的那一行
+      });
+    }
   },
 };

@@ -1,20 +1,12 @@
 import React, { PureComponent } from "react";
-import {
-  Button,
-  Card,
-  Select,
-  message,
-  Modal,
-  Table,
-  Form,
-  DatePicker,
-} from "antd";
+import { Button, Card, message, Modal, Form } from "antd";
 import axios from "../../axios";
+import FilterForm from "../../components/BaseForm";
+import ETable from "../../components/ETable";
 import Utils from "../../utils/utils";
-const FormItem = Form.Item;
-const Option = Select.Option;
 export default class Order extends PureComponent {
   state = {
+    selectedItem: [],
     selectedRowKeys: [],
     selectedRowIds: [],
     isOrderVisible: false,
@@ -26,29 +18,8 @@ export default class Order extends PureComponent {
   }
   //   请求数据
   requestList = () => {
-    axios
-      .ajax({
-        url: "/order",
-        data: {
-          params: {
-            page: this.params.page,
-          },
-        },
-      })
-      .then((res) => {
-        if (res.code == "0") {
-          this.setState({
-            dataSource: res.result.map((item, index) => {
-              item.key = index;
-              return item;
-            }),
-            pagination: Utils.pagination(res, (current) => {
-              this.params.page = current;
-              this.requestList();
-            }),
-          });
-        }
-      });
+    let _this = this;
+    axios.requestList(_this, "/order", this.params.page);
   };
   //   当前页码
   params = {
@@ -131,6 +102,11 @@ export default class Order extends PureComponent {
       return;
     };
   };
+  // 点击提交
+  handleFilter = (params) => {
+    this.params = params;
+    this.requestList();
+  };
   render() {
     const {
       dataSource,
@@ -200,14 +176,42 @@ export default class Order extends PureComponent {
         span: 19,
       },
     };
-    const rowSelection = {
-      type: "radio",
-      selectedRowKeys, //指定选中项的 key 数组，需要和 onChange 进行配合
-    };
+    const formList = [
+      {
+        type: "SELECT",
+        label: "城市",
+        name: "city_id",
+        placeholder: "全部",
+        initialValue: "",
+        width: 100,
+        list: [
+          { id: "", name: "全部" },
+          { id: "1", name: "北京" },
+          { id: "2", name: "天津" },
+          { id: "3", name: "上海" },
+        ],
+      },
+      {
+        type: "时间查询",
+      },
+      {
+        type: "SELECT",
+        label: "订单状态",
+        name: "order_status",
+        placeholder: "全部",
+        initialValue: "0",
+        width: 100,
+        list: [
+          { id: "0", name: "全部" },
+          { id: "1", name: "进行中" },
+          { id: "2", name: "结束行程" },
+        ],
+      },
+    ];
     return (
       <div className="bbton">
         <Card>
-          <FilterForm />
+          <FilterForm formList={formList} filterSubmit={this.handleFilter} />
         </Card>
         <Card style={{ marginTop: 10 }}>
           <Button
@@ -221,22 +225,15 @@ export default class Order extends PureComponent {
             结束订单
           </Button>
         </Card>
-        <Table
-          bordered
+        <ETable
+          updateSelectedItem={Utils.updateSelectedItem.bind(this)}
           columns={columns}
           dataSource={dataSource}
           pagination={pagination}
           selectedRowKeys={selectedRowKeys}
           selectedIds={selectedIds}
           selectedItem={selectedItem}
-          rowSelection={rowSelection} //单选多选
-          onRow={(record, index) => {
-            return {
-              onClick: () => {
-                this.onRowClick(record, index);
-              },
-            };
-          }}
+          // rowSelection="checkbox"
         />
         <Modal
           title="结束订单"
@@ -264,41 +261,6 @@ export default class Order extends PureComponent {
           </Form>
         </Modal>
       </div>
-    );
-  }
-}
-class FilterForm extends PureComponent {
-  render() {
-    return (
-      <Form layout="inline" style={{ margin: "0 20px" }}>
-        <FormItem label="城市" name="city_id" initialValue="">
-          <Select style={{ width: 100 }} placeholder="全部">
-            <Option value="">全部</Option>
-            <Option value="1">北京</Option>
-            <Option value="2">天津</Option>
-            <Option value="3">河北</Option>
-          </Select>
-        </FormItem>
-        <FormItem name="start_time">
-          <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
-        </FormItem>
-        <FormItem name="end_time">
-          <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
-        </FormItem>
-        <FormItem label="订单状态" name="op_mode" initialValue="">
-          <Select style={{ width: 100 }} placeholder="全部">
-            <Option value="">全部</Option>
-            <Option value="1">进行中</Option>
-            <Option value="2">结束状态</Option>
-          </Select>
-        </FormItem>
-        <FormItem>
-          <Button type="primary" style={{ margin: "0 20px" }}>
-            查询
-          </Button>
-          <Button style={{ margin: "0 20px" }}>重置</Button>
-        </FormItem>
-      </Form>
     );
   }
 }

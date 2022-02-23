@@ -1,6 +1,7 @@
 import axios from "axios";
 import jsonP from "jsonp";
 import { Modal } from "antd";
+import Utils from "../utils/utils";
 export default class Axios {
   static jsonp(options) {
     return new Promise((resolve, reject) => {
@@ -49,6 +50,28 @@ export default class Axios {
           reject(response.data);
         }
       });
+    });
+  }
+  static requestList(_this, url, params) {
+    let datas = {
+      params,
+    };
+    this.ajax({
+      url,
+      datas,
+    }).then((res) => {
+      if (res.code == "0") {
+        _this.setState({
+          dataSource: res.result.map((item, index) => {
+            item.key = index;
+            return item;
+          }),
+          pagination: Utils.pagination(res, (current) => {
+            _this.params.page = current;
+            _this.requestList();
+          }),
+        });
+      }
     });
   }
 }

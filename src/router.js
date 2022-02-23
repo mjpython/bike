@@ -20,6 +20,7 @@ import Hightable from "./pages/table/highTable";
 import City from "./pages/city";
 import Order from "./pages/order";
 import Common from "./common";
+import User from "./pages/user";
 import Detail from "./pages/order/detail";
 export default class IRouter extends PureComponent {
   render() {
@@ -48,6 +49,7 @@ export default class IRouter extends PureComponent {
                     <Route path="/admin/table/high" component={Hightable} />
                     <Route path="/admin/city" component={City} />
                     <Route path="/admin/order" component={Order} />
+                    <Route path="/admin/user" component={User} />
                     {/* <Route component={Nomatch} /> */}
                   </Switch>
                 </Admin>
