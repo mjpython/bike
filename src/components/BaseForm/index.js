@@ -51,7 +51,7 @@ export default class FilterForm extends PureComponent {
             );
             formItemList.push(formitme);
             formitme = (
-              <FormItem name="end_time">
+              <FormItem name="end_time" label="~" colon={false}>
                 <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
               </FormItem>
             );

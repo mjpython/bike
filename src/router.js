@@ -22,6 +22,11 @@ import Order from "./pages/order";
 import Common from "./common";
 import User from "./pages/user";
 import Detail from "./pages/order/detail";
+import BikeMap from "./pages/map/bikeMap";
+import Bar from "./pages/echats/bar";
+import Pie from "./pages/echats/pie";
+import Line from "./pages/echats/line";
+import Rich from "./pages/rich";
 export default class IRouter extends PureComponent {
   render() {
     return (
@@ -50,6 +55,10 @@ export default class IRouter extends PureComponent {
                     <Route path="/admin/city" component={City} />
                     <Route path="/admin/order" component={Order} />
                     <Route path="/admin/user" component={User} />
+                    <Route path="/admin/bikeMap" component={BikeMap} />
+                    <Route path="/admin/charts/bar" component={Bar} />
+                    <Route path="/admin/charts/pie" component={Pie} />
+                    <Route path="/admin/rich" component={Rich} />
                     {/* <Route component={Nomatch} /> */}
                   </Switch>
                 </Admin>
