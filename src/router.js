@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 import Nomatch from "./pages/nomatch";
 import Login from "./pages/login";
 import Admin from "./admin";
@@ -27,6 +27,7 @@ import Bar from "./pages/echats/bar";
 import Pie from "./pages/echats/pie";
 import Line from "./pages/echats/line";
 import Rich from "./pages/rich";
+import Permission from "./pages/permission";
 export default class IRouter extends PureComponent {
   render() {
     return (
@@ -34,36 +35,6 @@ export default class IRouter extends PureComponent {
         <App>
           <Switch>
             <Route path="/login" component={Login} />
-            <Route
-              path="/admin"
-              render={() => (
-                <Admin>
-                  <Switch>
-                    <Route path="/admin/home" component={Home} />
-                    <Route path="/admin/ui/buttons" component={Buttons} />
-                    <Route path="/admin/ui/modals" component={Modals} />
-                    <Route path="/admin/ui/loadings" component={Loading} />
-                    <Route path="/admin/ui/notification" component={Notices} />
-                    <Route path="/admin/ui/messages" component={Message} />
-                    <Route path="/admin/ui/tabs" component={Tabbs} />
-                    <Route path="/admin/ui/gallery" component={Gallery} />
-                    <Route path="/admin/ui/carousel" component={Carousels} />
-                    <Route path="/admin/form/login" component={Loginn} />
-                    <Route path="/admin/form/reg" component={Register} />
-                    <Route path="/admin/table/basic" component={Basictable} />
-                    <Route path="/admin/table/high" component={Hightable} />
-                    <Route path="/admin/city" component={City} />
-                    <Route path="/admin/order" component={Order} />
-                    <Route path="/admin/user" component={User} />
-                    <Route path="/admin/bikeMap" component={BikeMap} />
-                    <Route path="/admin/charts/bar" component={Bar} />
-                    <Route path="/admin/charts/pie" component={Pie} />
-                    <Route path="/admin/rich" component={Rich} />
-                    {/* <Route component={Nomatch} /> */}
-                  </Switch>
-                </Admin>
-              )}
-            />
             <Route
               path="/common"
               render={() => (
@@ -73,6 +44,39 @@ export default class IRouter extends PureComponent {
                     component={Detail}
                   />
                 </Common>
+              )}
+            />
+            <Route
+              path="/"
+              render={() => (
+                <Admin>
+                  <Switch>
+                    <Route path="/home" component={Home} />
+                    <Route path="/ui/buttons" component={Buttons} />
+                    <Route path="/ui/modals" component={Modals} />
+                    <Route path="/ui/loadings" component={Loading} />
+                    <Route path="/ui/notification" component={Notices} />
+                    <Route path="/ui/messages" component={Message} />
+                    <Route path="/ui/tabs" component={Tabbs} />
+                    <Route path="/ui/gallery" component={Gallery} />
+                    <Route path="/ui/carousel" component={Carousels} />
+                    <Route path="/form/login" component={Loginn} />
+                    <Route path="/form/reg" component={Register} />
+                    <Route path="/table/basic" component={Basictable} />
+                    <Route path="/table/high" component={Hightable} />
+                    <Route path="/city" component={City} />
+                    <Route path="/order" component={Order} />
+                    <Route path="/user" component={User} />
+                    <Route path="/bikeMap" component={BikeMap} />
+                    <Route path="/charts/bar" component={Bar} />
+                    <Route path="/charts/pie" component={Pie} />
+                    <Route path="/charts/line" component={Line} />
+                    <Route path="/rich" component={Rich} />
+                    <Route path="/permission" component={Permission} />
+                    {/* <Route component={Nomatch} /> */}
+                    <Redirect to="/home" />
+                  </Switch>
+                </Admin>
               )}
             />
           </Switch>

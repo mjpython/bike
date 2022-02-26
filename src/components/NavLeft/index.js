@@ -20,7 +20,7 @@ export default class NavLeft extends PureComponent {
       }
       return (
         <Menu.Item key={item.key}>
-          <NavLink to={"/admin" + item.key}>{item.title}</NavLink>
+          <NavLink to={item.key}>{item.title}</NavLink>
         </Menu.Item>
       );
     });

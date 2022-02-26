@@ -3,10 +3,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./router";
 import reportWebVitals from "./reportWebVitals";
+import { ConfigProvider } from "antd";
+import zhCN from "antd/lib/locale/zh_CN";
 ReactDOM.render(
-  <div>
+  <ConfigProvider locale={zhCN}>
     <App />
-  </div>,
+  </ConfigProvider>,
   document.getElementById("root")
 );
 

@@ -37,7 +37,7 @@ export default class Rich extends Component {
   render() {
     const { editorState } = this.state;
     return (
-      <div>
+      <div className="bbton">
         <Card>
           <Button
             type="primary"
