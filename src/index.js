@@ -5,10 +5,15 @@ import App from "./router";
 import reportWebVitals from "./reportWebVitals";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/lib/locale/zh_CN";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
 ReactDOM.render(
-  <ConfigProvider locale={zhCN}>
-    <App />
-  </ConfigProvider>,
+  <Provider store={store}>
+    {console.log(store)}
+    <ConfigProvider locale={zhCN}>
+      <App />
+    </ConfigProvider>
+  </Provider>,
   document.getElementById("root")
 );
 

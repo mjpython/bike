@@ -3,7 +3,8 @@ import { Row, Col } from "antd";
 import "./index.less";
 import axios from "axios";
 import utils from "../../utils/utils";
-export default class Header extends PureComponent {
+import { connect } from "react-redux";
+class Header extends PureComponent {
   state = {
     userName: "小试牛刀",
   };
@@ -55,7 +56,7 @@ export default class Header extends PureComponent {
         ) : (
           <Row className="breadcrumb">
             <Col span="4" className="breadcrumb-title">
-              首页
+              {this.props.menuName}
             </Col>
             <Col span="20" className="weather">
               <span className="date">{this.state.sysTime}</span>
@@ -71,3 +72,10 @@ export default class Header extends PureComponent {
     );
   }
 }
+const mapStateToprops = (state) => {
+  console.log(state.menuName);
+  return {
+    menuName: state.menuName,
+  };
+};
+export default connect(mapStateToprops)(Header);
